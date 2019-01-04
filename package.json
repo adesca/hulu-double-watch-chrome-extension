@@ -1,0 +1,24 @@
+{
+  "name": "hulu-double-watch-chrome-extension",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/jest": "^23.3.11",
+    "@types/node": "^10.12.18",
+    "browserify": "^16.2.3",
+    "chrome-extension-async": "^3.3.0",
+    "gulp": "^4.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-typescript": "^5.0.0",
+    "jest": "^23.6.0",
+    "ts-jest": "^23.10.5",
+    "typescript": "^3.2.2"
+  }
+}
