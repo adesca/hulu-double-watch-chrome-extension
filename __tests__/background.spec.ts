@@ -10,7 +10,7 @@ describe('background', function () {
 
         browser.pageAction.onClicked.dispatchEvent({id: 1} as browser.tabs.Tab);
         expect(connectSpy).toHaveBeenCalled();
-        expect(subjectBackground.port).toBeDefined();
+        expect(subjectBackground.ports[1]).toBeDefined();
     });
 
     it('should disconnect from port connection if page_action is clicked twice', function () {
@@ -37,6 +37,6 @@ describe('background', function () {
         browser.pageAction.onClicked.dispatchEvent({id: 1} as browser.tabs.Tab);
         browser.pageAction.onClicked.dispatchEvent({id: 1} as browser.tabs.Tab);
 
-        expect(subjectBackground.port).toBeDefined();
+        expect(subjectBackground.ports[1]).toBeDefined();
     });
 });

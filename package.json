@@ -9,7 +9,8 @@
     "bundle:content-script": "browserify -o dist/content-script.js -e tsc-build-output/content/entry.js",
     "bundle:background-script": "browserify -o dist/background-script.js -e tsc-build-output/background/entry.js",
     "watch": "watchify content/create-sidebar.js -o dist/content-script.js -v",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "test:background": "jest --testNamePattern=background"
   },
   "keywords": [],
   "author": "",
