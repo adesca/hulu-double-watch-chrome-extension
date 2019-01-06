@@ -4,6 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "npm run compile && npm run bundle:content-script && npm run bundle:background-script",
+    "compile": "tsc",
+    "bundle:content-script": "browserify -o dist/content-script.js -e tsc-build-output/content/entry.js",
+    "bundle:background-script": "browserify -o dist/background-script.js -e tsc-build-output/background/entry.js",
+    "watch": "watchify content/create-sidebar.js -o dist/content-script.js -v",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -19,6 +24,8 @@
     "gulp-typescript": "^5.0.0",
     "jest": "^23.6.0",
     "ts-jest": "^23.10.5",
-    "typescript": "^3.2.2"
+    "typescript": "^3.2.2",
+    "watchify": "^3.11.0",
+    "web-ext-types": "^3.1.0"
   }
 }
