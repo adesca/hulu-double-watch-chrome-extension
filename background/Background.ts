@@ -14,6 +14,7 @@ export class Background extends BrowserUser {
                     const potentialCurrentPort = this.ports[tab.id];
                     if (potentialCurrentPort) {
                         potentialCurrentPort.disconnect();
+                        this.ports[tab.id] = undefined;
                     } else {
                         if (this.browser.tabs.connect) {
                             this.ports[tab.id] = this.browser.tabs.connect(tab.id);
