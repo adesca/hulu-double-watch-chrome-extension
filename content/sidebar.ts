@@ -1,6 +1,11 @@
+import {Chat} from "./chat";
+
 export class Sidebar {
+    chat: Chat | undefined;
+
     showSidebar = () => {
         this.moveBodyToAnotherDivRoot();
+        this.shrinkBodyVideoContainersForSidebar();
         this.addSidebar();
         this.styleBody();
     };
@@ -18,10 +23,17 @@ export class Sidebar {
 
     private sideBarContainer: HTMLElement | null = null;
     private addSidebar = () => {
+
         this.sideBarContainer = document.createElement('div');
+        this.sideBarContainer.style.width = '30%';
         this.sideBarContainer.id = 'sidebarContainer';
+        this.sideBarContainer.style.zIndex = '3001';
+        
+
         const sidebarEl = document.createElement('div');
         sidebarEl.id = 'sidebar';
+        sidebarEl.textContent = 'some sidebar content';
+        this.chat = new Chat(sidebarEl);
 
         this.sideBarContainer.appendChild(sidebarEl);
         document.body.appendChild(this.sideBarContainer);
@@ -30,6 +42,7 @@ export class Sidebar {
     private moveBodyToAnotherDivRoot = () => {
         const div = document.createElement("div");
         div.id = "body-container";
+        div.style.width = '75%';
 
         // Move the body's children into this wrapper
         while (document.body.firstChild) {
@@ -48,5 +61,14 @@ export class Sidebar {
 
     resetBodyStyle = () => {
         document.body.style.display = this._originalBodyDisplay;
+    }
+
+    private shrinkBodyVideoContainersForSidebar() {
+        const containerEl = document.querySelector('.Player__container');
+        if (containerEl) {
+            (containerEl as HTMLElement).style.width = '70%';
+        } else {
+            console.error("Could not find player container");
+        }
     }
 }

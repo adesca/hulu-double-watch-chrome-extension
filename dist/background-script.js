@@ -19,19 +19,24 @@ var Background = /** @class */ (function (_super) {
     __extends(Background, _super);
     function Background(globalBrowser) {
         var _this = _super.call(this, globalBrowser) || this;
+        _this.ports = {};
         if (globalBrowser.pageAction.onClicked) {
             globalBrowser.pageAction.onClicked.addListener(function (tab) {
-            console.log('page action exists ', _this);
                 // this.port existing should imply whether or not a connection is open
-                if (_this.port) {
-                    _this.port.disconnect();
-                }
-                else {
-                    if (tab.id && _this.browser.tabs.connect) {
-                        _this.port = _this.browser.tabs.connect(tab.id);
+                if (tab.id) {
+                    var potentialCurrentPort = _this.ports[tab.id];
+                    if (potentialCurrentPort) {
+                        potentialCurrentPort.disconnect();
+                        _this.ports[tab.id] = undefined;
                     }
                     else {
-                        console.error("Tab is malformed or the browser is missing tabs", tab, _this.browser);
+                        if (_this.browser.tabs.connect) {
+                            _this.ports[tab.id] = _this.browser.tabs.connect(tab.id);
+                            console.log("A new tab has connected: ", tab);
+                        }
+                        else {
+                            console.error("Tab is malformed or the browser is missing tabs", tab, _this.browser);
+                        }
                     }
                 }
             });

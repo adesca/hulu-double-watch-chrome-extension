@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #video-player {
+            width: 100%;
+            height: 100%;
+        }
+
+        video {
+            display: inline-block;
+            vertical-align: baseline;
+            width: 100%;
+        }
+
+        .intro-container {
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+        }
+
+        .video-player {
+            width: 100%;
+            height: 100%;
+        }
+
+        .Player__container {
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(41,44,51,.5);
+            z-index: 3001;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div class="Player__container">
+    <div class="intro-container">
+
+        <video class="video-player" src="SampleVideo_1280x720_1mb.mp4"></video>
+    </div>
+
+</div>
+
+</body>
+</html>
