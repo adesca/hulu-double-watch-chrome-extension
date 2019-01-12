@@ -9,11 +9,11 @@ export class Chat {
     private createChat(sidebarEl: HTMLDivElement) {
         sidebarEl.innerHTML = chatHtml;
 
-        const styleNode = document.createElement('style');
-
-        var styleText = document.createTextNode(chatStyle);
-        styleNode.appendChild(styleText);
-        document.getElementsByTagName('head')[0].appendChild(styleNode);
+        // const styleNode = document.createElement('style');
+        //
+        // var styleText = document.createTextNode(chatStyle);
+        // styleNode.appendChild(styleText);
+        // document.getElementsByTagName('head')[0].appendChild(styleNode);
     }
 }
 

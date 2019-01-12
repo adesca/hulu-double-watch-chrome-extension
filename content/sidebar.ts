@@ -25,7 +25,7 @@ export class Sidebar {
     private addSidebar = () => {
 
         this.sideBarContainer = document.createElement('div');
-        this.sideBarContainer.style.width = '30%';
+        this.sideBarContainer.style.width = '25%';
         this.sideBarContainer.id = 'sidebarContainer';
         this.sideBarContainer.style.zIndex = '3001';
         

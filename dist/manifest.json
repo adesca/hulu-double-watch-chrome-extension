@@ -18,7 +18,11 @@
       ],
       "js": [
         "content-script.js"
-      ]
+      ],
+//      "css": [
+//        "static/chat-styles.css",
+//        "static/message-styles.css"
+//      ]
     }
   ],
   "permissions": [
