@@ -8,16 +8,12 @@
     flex-direction: column;
     height: 100vh;
     background: var(--background-color);
-}
-
-textarea {
-    position: absolute;
-    bottom: 5px;
+    color: #b5bfc9;
 }
 
 #message-container {
     overflow: scroll;
-    height: 90%;
+    height: 85%;
 }
 
 #sidebarContainer {
@@ -73,3 +69,7 @@ textarea {
     padding-right: 15px;
     /*padding-right: 50px;*/
 }
+
+/*input {*/
+    /*width: 60%;*/
+/*}*/
