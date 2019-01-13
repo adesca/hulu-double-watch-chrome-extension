@@ -15,28 +15,54 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var types_1 = require("../util/types");
+var BLUE_ICON_URL = browser.runtime.getURL('icons/d-blue.png');
+var GREEN_ICON_URL = browser.runtime.getURL('icons/d-green.png');
 var Background = /** @class */ (function (_super) {
     __extends(Background, _super);
     function Background(globalBrowser) {
         var _this = _super.call(this, globalBrowser) || this;
         _this.ports = {};
-        if (globalBrowser.pageAction.onClicked) {
-            globalBrowser.pageAction.onClicked.addListener(function (tab) {
+        if (_this.browser.runtime) {
+            console.log('setting up connection listener');
+            _this.browser.runtime.onConnect.addListener(function (port) {
+                if (port.sender && port.sender.tab && port.sender.tab.id) {
+                    var senderTabId_1 = port.sender.tab.id;
+                    _this.ports[senderTabId_1] = port;
+                    port.onDisconnect.addListener(function (port) {
+                        _this.ports[senderTabId_1] = undefined;
+                    });
+                    console.log('A new tab has connected');
+                }
+                else {
+                    console.error("Received a connection request without a sender field, ", port);
+                }
+            });
+        }
+        if (_this.browser.pageAction.onClicked) {
+            console.log('can click ', _this.browser.pageAction);
+            // (<any> this.browser.pageAction.onClicked).dispatch({});
+            _this.browser.pageAction.onClicked.addListener(function (tab) {
+                console.log('clicked ', tab);
                 // this.port existing should imply whether or not a connection is open
                 if (tab.id) {
+                    browser.pageAction.setIcon({
+                        tabId: tab.id,
+                        path: 'icons/d-green-38.png'
+                    });
                     var potentialCurrentPort = _this.ports[tab.id];
                     if (potentialCurrentPort) {
-                        potentialCurrentPort.disconnect();
-                        _this.ports[tab.id] = undefined;
+                        potentialCurrentPort.postMessage({
+                            act: 'clicked'
+                        });
+                        // potentialCurrentPort.disconnect();
+                        // browser.pageAction.setIcon({
+                        //     tabId: tab.id,
+                        //     path: GREEN_ICON_URL
+                        // })
+                        // this.ports[tab.id] = undefined;
                     }
                     else {
-                        if (_this.browser.tabs.connect) {
-                            _this.ports[tab.id] = _this.browser.tabs.connect(tab.id);
-                            console.log("A new tab has connected: ", tab);
-                        }
-                        else {
-                            console.error("Tab is malformed or the browser is missing tabs", tab, _this.browser);
-                        }
+                        console.error("A click was attempted for tab " + tab.id + " before the tab connected", tab);
                     }
                 }
             });

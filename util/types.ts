@@ -10,7 +10,10 @@ export module Types {
     };
 
     export type PartialBrowser = {
-        runtime: {onConnect: typeof browser.runtime.onConnect};
+        runtime: {
+            onConnect: typeof browser.runtime.onConnect,
+            connect: typeof browser.runtime.connect
+        };
         pageAction: Partial<typeof browser.pageAction>;
         tabs:  Partial<typeof browser.tabs>
     }

@@ -4,7 +4,7 @@
   "version": "1.0",
   "description": "Adds a red border to all webpages matching mozilla.org.",
   "icons": {
-    "48": "icons/fancy-d.jpg"
+    "48": "icons/d-blue.png"
   },
   "background": {
     "scripts": [
@@ -19,10 +19,11 @@
       "js": [
         "content-script.js"
       ],
-//      "css": [
-//        "static/chat-styles.css",
-//        "static/message-styles.css"
-//      ]
+      "css": [
+        "static/flex-chat.css",
+        "static/messages.css",
+        "static/text-area.css"
+      ]
     }
   ],
   "permissions": [
@@ -30,9 +31,9 @@
   ],
   "page_action": {
     "browser_style": true,
-    "default_icon": {
-      "48": "icons/fancy-d.jpg"
-    },
-    "show_matches": ["<all_urls>"]
+    "default_icon": "icons/d-blue.png",
+    "show_matches": [
+      "<all_urls>"
+    ]
   }
 }

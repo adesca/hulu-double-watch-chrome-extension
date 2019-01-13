@@ -14,15 +14,13 @@ export class ContentOrchestrator extends BrowserUser {
     constructor(windowBrowser: PartialBrowser) {
         super(windowBrowser);
 
-        if (this.browser.runtime) {
-            this.browser.runtime.onConnect.addListener((port: Port) => {
-                this.myPort = port;
-                port.onDisconnect.addListener((myPort) => {
-                    sidebar.hideSidebar();
-                });
-                sidebar.showSidebar();
-            });
-        }
+        this.myPort = this.browser.runtime.connect();
+        this.myPort.onMessage.addListener(message => {
+            console.log('Received a message ', message);
+            sidebar.updateView();
+
+        });
+
 
     }
 }

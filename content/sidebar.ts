@@ -2,6 +2,17 @@ import {Chat} from "./chat";
 
 export class Sidebar {
     chat: Chat | undefined;
+    isChatInView = false;
+
+    updateView = () => {
+        if (!this.isChatInView) {
+            this.showSidebar();
+        } else {
+            this.hideSidebar();
+        }
+
+        this.isChatInView = !this.isChatInView;
+    };
 
     showSidebar = () => {
         this.moveBodyToAnotherDivRoot();
@@ -25,7 +36,7 @@ export class Sidebar {
     private addSidebar = () => {
 
         this.sideBarContainer = document.createElement('div');
-        this.sideBarContainer.style.width = '25%';
+        // this.sideBarContainer.style.width = '25%';
         this.sideBarContainer.id = 'sidebarContainer';
         this.sideBarContainer.style.zIndex = '3001';
         
