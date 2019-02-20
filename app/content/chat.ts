@@ -12,12 +12,5 @@ export class Chat {
             this.sidebarEl.innerHTML = chatHtml;
         })
 
-        // sidebarEl.innerHTML = chatHtml;
-
-        // const styleNode = document.createElement('style');
-        //
-        // var styleText = document.createTextNode(chatStyle);
-        // styleNode.appendChild(styleText);
-        // document.getElementsByTagName('head')[0].appendChild(styleNode);
     }
 }

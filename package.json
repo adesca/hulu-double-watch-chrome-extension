@@ -10,7 +10,8 @@
     "bundle:background-script": "browserify -o dist/background-script.js -e tsc-build-output/background/entry.js",
     "watch": "watchify content/create-sidebar.js -o dist/content-script.js -v",
     "test": "jest",
-    "test:background": "jest --testNamePattern=background"
+    "test:background": "jest --testNamePattern=background",
+    "build:e2e": "tsc --project chat-app/tsconfig.json && browserify -e chat-app/entry.js -o chat-app/build.js"
   },
   "keywords": [],
   "author": "",

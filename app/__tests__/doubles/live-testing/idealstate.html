@@ -44,6 +44,28 @@
     <link rel="stylesheet" href="idealstate_files/flex-chat.css">
     <link rel="stylesheet" href="idealstate_files/messages.css">
     <link rel="stylesheet" href="idealstate_files/text-area.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
+    <script>
+        var socket = new SockJS('http://localhost:8080/chat');
+        var stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function (frame) {
+            // setConnected(true);
+            console.log('Connected');
+            stompClient.subscribe('/topic/messages', function (message) {
+                console.log('message ', message);
+            });
+
+            stompClient.send('/app/chat/aTopic', {}, '{}');
+
+            stompClient.subscribe('/queue/init', function (greeting) {
+                console.log('greeting ', greeting);
+                // showGreeting(JSON.parse(greeting.body).content);
+            });
+        });
+    </script>
 </head>
 <body style="display: flex;">
 <div id="body-container" style="width: 75%;">

@@ -14,7 +14,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var types_1 = require("../util/types");
+var types_1 = require("../app/util/types");
 var BLUE_ICON_URL = browser.runtime.getURL('icons/d-blue.png');
 var GREEN_ICON_URL = browser.runtime.getURL('icons/d-green.png');
 var Background = /** @class */ (function (_super) {
