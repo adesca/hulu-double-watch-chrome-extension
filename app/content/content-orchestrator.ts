@@ -5,7 +5,7 @@ import {BrowserUser, Types} from "../util/types";
 import PartialBrowser = Types.PartialBrowser;
 
 export const messageBus: Observable<any> = new Observable();
-const sidebar = new Sidebar();
+let sidebar: Sidebar;
 
 
 export class ContentOrchestrator extends BrowserUser {
@@ -13,14 +13,20 @@ export class ContentOrchestrator extends BrowserUser {
 
     constructor(windowBrowser: PartialBrowser) {
         super(windowBrowser);
+        sidebar = new Sidebar();
+        console.log('initing');
 
         this.myPort = this.browser.runtime.connect();
-        this.myPort.onMessage.addListener(message => {
-            console.log('Received a message ', message);
-            sidebar.updateView();
 
+        this.myPort.onMessage.addListener(message => {
+            console.log('orchestrator received a message ', message);
+            sidebar.updateView();
         });
 
+        this.myPort.onDisconnect.addListener(port => {
+            console.log('orchestrator disconnecting');
+            sidebar.hideSidebar();
+        })
 
     }
 }

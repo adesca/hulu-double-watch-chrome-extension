@@ -28,6 +28,7 @@ export class Sidebar {
 
     private removeSidebar = () => {
         if (this.sideBarContainer) {
+            console.log('*************** ', document.body.innerHTML);
             document.body.removeChild(this.sideBarContainer)
         }
     };
@@ -39,15 +40,16 @@ export class Sidebar {
         // this.sideBarContainer.style.width = '25%';
         this.sideBarContainer.id = 'sidebarContainer';
         this.sideBarContainer.style.zIndex = '3001';
-        
-
         const sidebarEl = document.createElement('div');
+
+
         sidebarEl.id = 'sidebar';
         sidebarEl.textContent = 'some sidebar content';
         this.chat = new Chat(sidebarEl);
-
         this.sideBarContainer.appendChild(sidebarEl);
+
         document.body.appendChild(this.sideBarContainer);
+        console.log('created sidebar ', document.body.innerHTML);
     };
 
     private moveBodyToAnotherDivRoot = () => {

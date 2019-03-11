@@ -6,7 +6,11 @@ export class BrowserFake {
     portFake = new PortFake();
 
     runtime = {
-        onConnect: this.onConnectListeners
+        onConnect: this.onConnectListeners,
+        connect: () => {
+            // this.onConnectListeners.dispatchEvent()
+            return this.portFake;
+        }
     };
     tabs = {
         connect: () => {
@@ -16,7 +20,14 @@ export class BrowserFake {
     };
 
     pageAction = {
-        onClicked: this.onPageActionClickListeners
+        onClicked: this.onPageActionClickListeners,
+        setIcon: () => Promise.resolve(),
+    };
+
+    cleanup() {
+        this.portFake = new PortFake();
+        this.onConnectListeners.clearListeners();
+        this.onPageActionClickListeners.clearListeners();
     }
 }
 
@@ -31,7 +42,9 @@ class PortFake implements Port {
 
     error = () => {};
     onMessage = new EvListenerDouble();
-    postMessage = () => {};
+    postMessage = (message: any) => {
+        this.onMessage.dispatchEvent(message);
+    };
 }
 
 class EvListenerDouble<T extends Function, EventType> {
@@ -46,5 +59,13 @@ class EvListenerDouble<T extends Function, EventType> {
         this.listeners.forEach(cb => {
             cb(event);
         })
+    }
+
+    clearListeners() {
+        this.listeners = [];
+    }
+
+    countListeners() {
+        return this.listeners.length;
     }
 }
